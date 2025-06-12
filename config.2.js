@@ -25,7 +25,7 @@ const farmingSpots = {
   crab: { map: "main", x: -1120, y: -50, mobs: ["crab"] },
   crabx: { map: "main", x: -1120, y: 1800, mobs: ["crabx"] },
   frog: { map: "main", x: -1120, y: 1360, mobs: ["frog"] },
-  rat: { map: "mansion", x: 0, y: 110, mobs: ["rat"] },
+  rat: { map: "mansion", x: 0, y: -110, mobs: ["rat"] },
   vrat: { map: "level1", x: 35, y: 35, mobs: ["prat"] },
   cgoo: { map: "arena", x: 420, y: -420, mobs: ["cgoo"] },
   stoneworm: { map: "spookytown", x: 500, y: 110, mobs: ["stoneworm"] },
@@ -37,5 +37,6 @@ const farmingSpots = {
 
 // === RUNTIME CONFIGURATION ===
 let farmingSpot = "igoo"; // Changeable via commands later
-let leader = "VertVertReal"; // High-luck player for aggro
+let leader = "xRehkyt"; // High-luck player for aggro
 let friend_controller = "VertVertReal"; // Trusted sender of CM info
+const blockList = ["hpot1", "mpot1", "tracker", "jacko", "computer"];

@@ -2,6 +2,7 @@
 
 async function roleAct() {
 	loot();
+	await scareAwayMobs(); 
   const target = getBestTarget();
 
   if (

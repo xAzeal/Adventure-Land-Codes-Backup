@@ -1,9 +1,13 @@
 // roles/warrior.js
+const kiting = true;
 const warriorOriginRangeRate = 1.1;
+
 let warriorRangeRate = warriorOriginRangeRate;
+
 
 async function roleAct() {
   loot();
+  await scareAwayMobs(true);
   const target = getBestTarget();
 
   // Use charge if moving
@@ -19,18 +23,17 @@ async function roleAct() {
   const allyBeingAttacked = Object.values(parent.entities).find(
     (e) =>
       e.type === "monster" &&
-      partyMems.includes(e.target) &&
+      e.target == "xHealer" &&
       e.target !== character.name &&
-      !e.cooperative
+     !e.cooperative
   );
-  if (
+ if (
     allyBeingAttacked &&
     can_use("taunt") &&
     character.mp > G.skills["taunt"].mp
   ) {
-    game_log("Helping " + allyBeingAttacked.name);
-    use_skill("taunt", allyBeingAttacked);
-    return;
+   use_skill("taunt", allyBeingAttacked);
+   return;
   }
 
   if (target && can_attack(target)) {
@@ -39,7 +42,7 @@ async function roleAct() {
     );
 
     const entitiesToStomp = Object.values(parent.entities).filter((e) =>
-      is_in_range(e, "stomp")
+     is_in_range(e, "stomp")
     );
 
     // Cleave
@@ -50,7 +53,7 @@ async function roleAct() {
     ) {
       if (character.slots.mainhand?.name !== "bataxe") {
         await equipBatch({ mainhand: "bataxe", offhand: undefined });
-      }
+      	}
       set_message("cleaving");
       use_skill("cleave");
       return;
@@ -77,11 +80,11 @@ async function roleAct() {
       return;
     }
   }
-
   set_message("Running");
-  await kite(target, warriorRangeRate);
+	if (kiting) {
+     kite(target, warriorRangeRate);
+	}
   angle = undefined;
-
   if (
     target &&
     target.range <= character.range &&
@@ -93,4 +96,9 @@ async function roleAct() {
   }
 
   set_message("Idle");
+}
+
+function on_draw(){
+	clear_drawings();
+	draw_circle(character.real_x, character.real_y, 160+character.range, 1.5, 0xffa1a1);
 }

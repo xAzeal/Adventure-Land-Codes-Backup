@@ -30,7 +30,12 @@ setInterval(() => {
 // Follow leader if too far
 setInterval(() => {
   if (character.ctype === "merchant") return;
-  const leaderEntity = get_entity(leader);
+	let leaderEntity = null;
+	if (follow_friend) {
+		leaderEntity = get_entity(friend_controller);
+	}else{
+		leaderEntity = get_entity(leader);
+	}
   if (smart.moving || character.moving) return;
 
   if (!leaderEntity && remotePosition !== null) {

@@ -4,7 +4,7 @@ let remoteTarget = null;
 let remoteTargetList = [];
 let remotePosition = null;
 let load_allies = false;
-let follow_friend = true;
+let follow_friend = false;
 
 // Load shared config and modules
 load_code("config");
@@ -24,9 +24,13 @@ if (!character.controller){
 // Load character-specific role behavior
 load_code(character.ctype);
 
-if (character.name === "LeLouche" && load_allies) {
+if (character.name === "LeLouche") {
+	if (load_allies){
 	game_log("loading allies");
 	load_code("loadAllies");
+	}
+} else {
+ setInterval(lookForMerch, 1000);
 }
 
 // Main behavior loop

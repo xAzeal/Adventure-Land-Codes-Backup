@@ -3,6 +3,8 @@
 game_log("THE HOLY LIGHT") 
 
 async function roleAct() {
+  loot();
+  await scareAwayMobs();
   const target = getBestTarget();
   const ally = getLowestHealth();
 
@@ -23,6 +25,6 @@ async function roleAct() {
     attack(target);
     set_message("Attack");
   }
-
+  scareMobs();
   set_message("Idle");
 }
